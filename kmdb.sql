@@ -68,7 +68,7 @@
 
 -- Drop existing tables, so you'll start fresh each time this script is run.
 DROP TABLE IF EXISTS movies;
-DROP TABLE IF EXISTS humans;
+DROP TABLE IF EXISTS individuals;
 DROP TABLE IF EXISTS top_cast;
 
 -- Create new tables, according to your domain model
@@ -77,10 +77,10 @@ CREATE TABLE movies (
     title TEXT,
     year_released INTEGER,
     mpaa_rating TEXT,
-    human_id INTEGER
+    individual_id INTEGER
 );
 
-CREATE TABLE humans (
+CREATE TABLE individuals (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT
 );
@@ -88,7 +88,7 @@ CREATE TABLE humans (
 CREATE TABLE top_cast (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   movie_id INTEGER,
-  human_id INTEGER,
+  individual_id INTEGER,
   character TEXT
 );
 
@@ -98,7 +98,7 @@ INSERT INTO movies(
     title,
     year_released,
     mpaa_rating,
-    human_id
+    individual_id
 )
 
 VALUES 
@@ -107,7 +107,7 @@ VALUES
   ("The Dark Knight Rises","2012","PG-13",1)
 ;
 
-INSERT INTO humans(
+INSERT INTO individuals(
   name
 )
 VALUES(
@@ -127,7 +127,7 @@ VALUES(
 
 INSERT INTO top_cast(
     movie_id,
-    human_id,
+    individual_id,
     character
 )
 VALUES 
@@ -154,9 +154,9 @@ VALUES
 .print ""
 
 -- The SQL statement for the movies output
-SELECT title, year_released, mpaa_rating, humans.name
+SELECT title, year_released, mpaa_rating, individuals.name
 FROM movies
-INNER JOIN humans ON humans.id = movies.human_id
+INNER JOIN individuals ON individuals.id = movies.individual_id
 ;
 
 -- Prints a header for the cast output
@@ -166,7 +166,7 @@ INNER JOIN humans ON humans.id = movies.human_id
 .print ""
 
 -- The SQL statement for the cast output
-SELECT movies.title, humans.name, top_cast.character
+SELECT movies.title, individuals.name, top_cast.character
 FROM top_cast 
 INNER JOIN movies on movies.id = top_cast.movie_id
-INNER JOIN humans ON humans.id = top_cast.human_id;
+INNER JOIN individuals ON individuals.id = top_cast.individual_id;

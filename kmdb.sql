@@ -101,8 +101,6 @@ INSERT INTO movies(
     human_id
 )
 
--- ADJUST put people_id instead of director
-
 VALUES 
   ("Batman Begins",
   "2005",
@@ -189,7 +187,6 @@ VALUES
   "Selina Kyle")
 ;
 
-
 -- Prints a header for the movies output
 .print "Movies"
 .print "======"
@@ -201,16 +198,13 @@ FROM movies
 INNER JOIN humans ON humans.id = movies.human_id
 ;
 
-
 -- Prints a header for the cast output
 .print ""
 .print "Top Cast"
 .print "========"
 .print ""
 
-
 -- The SQL statement for the cast output
-
 SELECT movies.title, humans.name, top_cast.character
 FROM top_cast 
 INNER JOIN movies on movies.id = top_cast.movie_id

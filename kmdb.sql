@@ -102,18 +102,9 @@ INSERT INTO movies(
 )
 
 VALUES 
-  ("Batman Begins",
-  "2005",
-  "PG-13",
-  1),
-   ("The Dark Knight",
-  "2008",
-  "PG-13",
-  1),
-  ("The Dark Knight Rises",
-  "2012",
-  "PG-13",
-  1)
+  ("Batman Begins","2005","PG-13",1),
+   ("The Dark Knight","2008","PG-13",1),
+  ("The Dark Knight Rises","2012","PG-13",1)
 ;
 
 INSERT INTO humans(
@@ -140,51 +131,21 @@ INSERT INTO top_cast(
     character
 )
 VALUES 
-  (1,
-  2,
-  "Bruce Wayne"),
-    (1,
-  3,
-  "Alfred"),  
-  (1,
-  4,
-  "Ra's Al Ghul"),
-  (1,
-  5,
-  "Rachel Dawes"),  
-  (1,
-  6,
-  "Commissioner Gordon"),
-    (2,
-  2,
-  "Bruce Wayne"),
-   (2,
-  7,
-  "Joker"),
-   (2,
-  8,
-  "Harvey Dent"),
-   (2,
-  3,
-  "Alfred"),
-   (2,
-  9,
-  "Rachel Dawes"),
-   (3,
-  2,
-  "Bruce Wayne"),
-    (3,
-  6,
-  "Commissioner Gordon"),
-     (3,
-  10,
-  "Bane"),
-     (3,
-  11,
-  "John Blake"),
-     (3,
-  12,
-  "Selina Kyle")
+  (1,2,"Bruce Wayne"),
+    (1,3,"Alfred"),  
+  (1,4,"Ra's Al Ghul"),
+  (1,5,"Rachel Dawes"),  
+  (1,6,"Commissioner Gordon"),
+    (2,2,"Bruce Wayne"),
+   (2,7,"Joker"),
+   (2,8,"Harvey Dent"),
+   (2,3,"Alfred"),
+   (2,9,"Rachel Dawes"),
+   (3,2,"Bruce Wayne"),
+    (3,6,"Commissioner Gordon"),
+     (3,10,"Bane"),
+     (3,11,"John Blake"),
+     (3,12,"Selina Kyle")
 ;
 
 -- Prints a header for the movies output

@@ -86,8 +86,6 @@ CREATE TABLE people (
   character TEXT
 );
 
-
-
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary => TO CHECK
 INSERT INTO movies(

@@ -86,11 +86,6 @@ CREATE TABLE people (
   character TEXT
 );
 
--- CREATE TABLE top_cast (
-  --  id INTEGER PRIMARY KEY AUTOINCREMENT,
-    --movie_id,
-    --people_id,
-);
 
 
 -- Insert data into your database that reflects the sample data shown above
@@ -101,6 +96,9 @@ INSERT INTO movies(
     mpaa_rating,
     director
 )
+
+-- ADJUST put people_id instead of director
+
 VALUES 
   ("Batman Begins",
   "2005",

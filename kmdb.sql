@@ -68,7 +68,8 @@
 
 -- Drop existing tables, so you'll start fresh each time this script is run.
 DROP TABLE IF EXISTS movies;
-DROP TABLE IF EXISTS people;
+DROP TABLE IF EXISTS humans;
+DROP TABLE IF EXISTS top_cast;
 
 -- Create new tables, according to your domain model
 CREATE TABLE movies (
@@ -76,13 +77,18 @@ CREATE TABLE movies (
     title TEXT,
     year_released INTEGER,
     mpaa_rating TEXT,
-    director TEXT
+    human_id INTEGER
 );
 
-CREATE TABLE people (
+CREATE TABLE humans (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT
+);
+
+CREATE TABLE top_cast (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   movie_id INTEGER,
-  name TEXT,
+  human_id INTEGER,
   character TEXT
 );
 
@@ -92,7 +98,7 @@ INSERT INTO movies(
     title,
     year_released,
     mpaa_rating,
-    director
+    human_id
 )
 
 -- ADJUST put people_id instead of director
@@ -101,66 +107,85 @@ VALUES
   ("Batman Begins",
   "2005",
   "PG-13",
-  "Christopher Nolan"),
+  1),
    ("The Dark Knight",
   "2008",
   "PG-13",
-  "Christopher Nolan"),
+  1),
   ("The Dark Knight Rises",
   "2012",
   "PG-13",
-  "Christopher Nolan")
+  1)
 ;
-INSERT INTO people(
+
+INSERT INTO humans(
+  name
+)
+VALUES(
+  "Christopher Nolan"),
+  ("Christian Bale"),
+  ("Michael Caine"),
+  ("Liam Neeson"),
+("Katie Holmes"),
+("Gary Oldman"),
+("Heath Ledger"),
+("Aaron Eckhardt"),
+("Maggie Gyllenhaal"),
+("Tom Hardy"),
+("Joseph Gordon-Levitt"),
+("Anne Hathaway")
+;
+
+INSERT INTO top_cast(
     movie_id,
-    name,
+    human_id,
     character
 )
 VALUES 
   (1,
-  "Christian Bale",
+  2,
   "Bruce Wayne"),
     (1,
-  "Michael Caine",
+  3,
   "Alfred"),  
   (1,
-  "Liam Neeson",
+  4,
   "Ra's Al Ghul"),
   (1,
-  "Katie Holmes",
+  5,
   "Rachel Dawes"),  
   (1,
-  "Gary Oldman",
+  6,
   "Commissioner Gordon"),
     (2,
-  "Christian Bale",
+  2,
   "Bruce Wayne"),
    (2,
-  "Heath Ledger",
+  7,
   "Joker"),
    (2,
-  "Aaron Eckhart",
+  8,
   "Harvey Dent"),
    (2,
-  "Michael Caine",
+  3,
   "Alfred"),
    (2,
-  "Maggie Gyllenhaal",
+  9,
   "Rachel Dawes"),
    (3,
-  "Christian Bale",
+  2,
   "Bruce Wayne"),
     (3,
-  "Gary Oldman",
+  6,
   "Commissioner Gordon"),
      (3,
-  "Tom Hardy",
+  10,
   "Bane"),
      (3,
-  "Joseph Gordon-Levitt",
+  11,
   "John Blake"),
      (3,
-  "Anne Hathaway",
+  12,
   "Selina Kyle")
 ;
 
@@ -171,8 +196,9 @@ VALUES
 .print ""
 
 -- The SQL statement for the movies output
-SELECT title, year_released, mpaa_rating, director
+SELECT title, year_released, mpaa_rating, humans.name
 FROM movies
+INNER JOIN humans ON humans.id = movies.human_id
 ;
 
 
@@ -184,7 +210,8 @@ FROM movies
 
 
 -- The SQL statement for the cast output
--- SELECT title, name, role
--- FROM top_cast
-SELECT movies.title, people.name, people.character
-FROM people INNER JOIN movies on movies.id = people.movie_id
+
+SELECT movies.title, humans.name, top_cast.character
+FROM top_cast 
+INNER JOIN movies on movies.id = top_cast.movie_id
+INNER JOIN humans ON humans.id = top_cast.human_id;

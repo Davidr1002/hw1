@@ -68,7 +68,7 @@
 
 -- Drop existing tables, so you'll start fresh each time this script is run.
 DROP TABLE IF EXISTS movies;
-DROP TABLE IF EXISTS top_cast;
+DROP TABLE IF EXISTS people;
 
 -- Create new tables, according to your domain model
 CREATE TABLE movies (
@@ -78,12 +78,20 @@ CREATE TABLE movies (
     mpaa_rating TEXT,
     director TEXT
 );
-CREATE TABLE top_cast (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT,
-    name TEXT,
-    role TEXT
+
+CREATE TABLE people (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  movie_id INTEGER,
+  name TEXT,
+  character TEXT
 );
+
+-- CREATE TABLE top_cast (
+  --  id INTEGER PRIMARY KEY AUTOINCREMENT,
+    --movie_id,
+    --people_id,
+);
+
 
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary => TO CHECK
@@ -107,55 +115,55 @@ VALUES
   "PG-13",
   "Christopher Nolan")
 ;
-INSERT INTO top_cast(
-    title,
+INSERT INTO people(
+    movie_id,
     name,
-    role
+    character
 )
 VALUES 
-  ("Batman Begins",
+  (1,
   "Christian Bale",
   "Bruce Wayne"),
-    ("Batman Begins",
+    (1,
   "Michael Caine",
   "Alfred"),  
-  ("Batman Begins",
+  (1,
   "Liam Neeson",
   "Ra's Al Ghul"),
-  ("Batman Begins",
+  (1,
   "Katie Holmes",
   "Rachel Dawes"),  
-  ("Batman Begins",
+  (1,
   "Gary Oldman",
   "Commissioner Gordon"),
-    ("The Dark Knight",
+    (2,
   "Christian Bale",
   "Bruce Wayne"),
-   ("The Dark Knight",
+   (2,
   "Heath Ledger",
   "Joker"),
-   ("The Dark Knight",
+   (2,
   "Aaron Eckhart",
   "Harvey Dent"),
-   ("The Dark Knight",
+   (2,
   "Michael Caine",
   "Alfred"),
-   ("The Dark Knight",
+   (2,
   "Maggie Gyllenhaal",
   "Rachel Dawes"),
-   ("The Dark Knight Rises",
+   (3,
   "Christian Bale",
   "Bruce Wayne"),
-    ("The Dark Knight Rises",
+    (3,
   "Gary Oldman",
   "Commissioner Gordon"),
-     ("The Dark Knight Rises",
+     (3,
   "Tom Hardy",
   "Bane"),
-     ("The Dark Knight Rises",
+     (3,
   "Joseph Gordon-Levitt",
   "John Blake"),
-     ("The Dark Knight Rises",
+     (3,
   "Anne Hathaway",
   "Selina Kyle")
 ;
@@ -180,6 +188,7 @@ FROM movies
 
 
 -- The SQL statement for the cast output
-SELECT title, name, role
-FROM top_cast
-;
+-- SELECT title, name, role
+-- FROM top_cast
+SELECT movies.title, people.name, people.character
+FROM people INNER JOIN movies on movies.id = people.movie_id
